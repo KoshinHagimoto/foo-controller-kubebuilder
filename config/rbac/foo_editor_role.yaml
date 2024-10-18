@@ -1,8 +1,11 @@
----
+# permissions for end users to edit foos.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: manager-role
+  labels:
+    app.kubernetes.io/name: foo-controller-kubebuilder
+    app.kubernetes.io/managed-by: kustomize
+  name: foo-editor-role
 rules:
 - apiGroups:
   - samplecontroller.hagitech.net
@@ -19,14 +22,6 @@ rules:
 - apiGroups:
   - samplecontroller.hagitech.net
   resources:
-  - foos/finalizers
-  verbs:
-  - update
-- apiGroups:
-  - samplecontroller.hagitech.net
-  resources:
   - foos/status
   verbs:
   - get
-  - patch
-  - update

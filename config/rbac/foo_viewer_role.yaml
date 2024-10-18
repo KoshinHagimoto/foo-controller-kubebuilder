@@ -1,32 +1,23 @@
----
+# permissions for end users to view foos.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: manager-role
+  labels:
+    app.kubernetes.io/name: foo-controller-kubebuilder
+    app.kubernetes.io/managed-by: kustomize
+  name: foo-viewer-role
 rules:
 - apiGroups:
   - samplecontroller.hagitech.net
   resources:
   - foos
   verbs:
-  - create
-  - delete
   - get
   - list
-  - patch
-  - update
   - watch
-- apiGroups:
-  - samplecontroller.hagitech.net
-  resources:
-  - foos/finalizers
-  verbs:
-  - update
 - apiGroups:
   - samplecontroller.hagitech.net
   resources:
   - foos/status
   verbs:
   - get
-  - patch
-  - update
